@@ -34,13 +34,49 @@ class ContactAdd extends JFrame {
         mainGrid.add("North",contentPanel);
 
 
-        JLabel AddContact=new JLabel("ADD CONTACT");
-        AddContact.setHorizontalAlignment(JLabel.CENTER);
-        AddContact.setFont(new Font("",1,35));
+        JPanel contactInfro=new JPanel(new GridLayout(1,2));
 
-        contentPanel.add(AddContact);
-        mainGrid.add(contentPanel);
-        add("North",mainGrid);
+        JPanel contactInfroLeft=new JPanel(new GridLayout(8,1));
+
+        JPanel nemepanel=new JPanel(new FlowLayout(FlowLayout. LEFT));
+        name=new JLabel("Name");
+        name.setHorizontalAlignment(JLabel.LEFT);
+        name.setFont(new Font("",1,20));
+
+        JPanel contactNummberpanel=new JPanel(new FlowLayout(FlowLayout. LEFT));
+        contactNummber=new JLabel("Contact Number");
+        contactNummber.setHorizontalAlignment(JLabel.LEFT);
+        contactNummber.setFont(new Font("",1,20));
+
+        JPanel companypanel=new JPanel(new FlowLayout(FlowLayout. LEFT));
+        company=new JLabel("Company");
+        company.setHorizontalAlignment(JLabel.LEFT);
+        company.setFont(new Font("",1,20));
+
+        JPanel salarypanel=new JPanel(new FlowLayout(FlowLayout. LEFT));
+        salary=new JLabel("Salary");
+        salary.setHorizontalAlignment(JLabel.LEFT);
+        salary.setFont(new Font("",1,20));
+
+        JPanel Brithdaypanel=new JPanel(new FlowLayout(FlowLayout. LEFT));
+        Brithday=new JLabel("Birthday");
+        Brithday.setHorizontalAlignment(JLabel.LEFT);
+        Brithday.setFont(new Font("",1,20));
+
+        nemepanel.add(name);
+        contactNummberpanel.add(contactNummber);
+        companypanel.add(company);
+        salarypanel.add(salary);
+        Brithdaypanel.add(Brithday);
+
+        contactInfroLeft.add(nemepanel);
+        contactInfroLeft.add(contactNummberpanel);
+        contactInfroLeft.add(companypanel);
+        contactInfroLeft.add(salarypanel);
+        contactInfroLeft.add(Brithdaypanel);
+
+        contactInfro.add(contactInfroLeft);
+        add("West",contactInfro);
 
 
     }
