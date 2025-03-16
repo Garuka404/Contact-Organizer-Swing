@@ -79,7 +79,78 @@ class ContactAdd extends JFrame {
         add("West",contactInfro);
 
 
+        /////////////////////////////////////contact textfeild
+
+        JPanel contactInfroRight=new JPanel(new GridLayout(8,1));
+
+        txtName=new JTextField(15);
+        txtName.setFont(new Font("",1,15));
+        JPanel nameTextPanel=new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        txtcontactNummber=new JTextField(15);
+        txtcontactNummber.setFont(new Font("",1,15));
+        JPanel contactNumTextPanel=new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        txtcompany=new JTextField(15);
+        txtcompany.setFont(new Font("",1,15));
+        JPanel companyTextPanel=new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        txtsalary=new JTextField(10);
+        txtsalary.setFont(new Font("",1,15));
+        JPanel salaryTextPanel=new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        txtBrithday=new JTextField(10);
+        txtBrithday.setFont(new Font("",1,15));
+        JPanel brithdayTextPanel=new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+
+        String name= txtName.getText();
+        String contactNummber= txtcontactNummber.getText();
+        String company= txtcompany.getText();
+        String salary=txtsalary.getText().trim();
+        // Long salary=Long.parseLong(Ssalary);
+        String Brithday= txtBrithday.getText();;
+        /////////////////////////////////Button grid
+
+        JPanel buttonPanel2=new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel buttonPanel= new JPanel(new GridLayout(1,2,5,5));
+        btAddContact =new JButton("ADD Contact");
+        btAddContact.setPreferredSize(new Dimension(110,25));
+        btAddContact.setFont(new Font("",1,12));
+
+        btCancel =new JButton("Cancel");
+        btCancel.setPreferredSize(new Dimension(110,25));
+        btCancel.setFont(new Font("",1,12));
+
+        JPanel btHomePanel=new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bthome =new JButton("Back To HomePage");
+        bthome.setPreferredSize(new Dimension(220,25));
+        bthome.setFont(new Font("",1,12));
+
+        btHomePanel.add(bthome);
+        buttonPanel.add(btAddContact);
+        buttonPanel.add(btCancel);
+        buttonPanel2.add(buttonPanel);
+        nameTextPanel.add(txtName);
+        contactNumTextPanel.add(txtcontactNummber);
+        companyTextPanel.add(txtcompany);
+        salaryTextPanel.add(txtsalary);
+        brithdayTextPanel.add(txtBrithday);
+
+        contactInfroRight.add(nameTextPanel);
+        contactInfroRight.add(contactNumTextPanel);
+        contactInfroRight.add(companyTextPanel);
+        contactInfroRight.add(salaryTextPanel);
+        contactInfroRight.add(brithdayTextPanel);
+        contactInfroRight.add(buttonPanel2);
+        contactInfroRight.add(btHomePanel);
+
+        contactInfro.add(contactInfroRight);
+        // add("East",contactInfro);
     }
+
+
+
 }
 
 public class addContact {
