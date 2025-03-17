@@ -1,13 +1,14 @@
 import javax.swing.*;
+import javax.swing.JOptionPane;
 import java.awt.*;
-
+import java.awt.event.*;
 class ContactAdd extends JFrame {
     JLabel AddContact;
-    JLabel name;
-    JLabel contactNummber;
-    JLabel company;
-    JLabel salary;
-    JLabel Brithday;
+    JLabel lbname;
+    JLabel lbcontactNummber;
+    JLabel lbcompany;
+    JLabel lbsalary;
+    JLabel lbBrithday;
     JTextField txtName;
     JTextField txtcontactNummber;
     JTextField txtcompany;
@@ -16,7 +17,7 @@ class ContactAdd extends JFrame {
     JButton btAddContact;
     JButton btCancel;
     JButton bthome;
-
+    homePage HomePage;
 
 
     ContactAdd() {
@@ -34,40 +35,50 @@ class ContactAdd extends JFrame {
         mainGrid.add("North",contentPanel);
 
 
+        JLabel AddContact=new JLabel("ADD CONTACT");
+        AddContact.setHorizontalAlignment(JLabel.CENTER);
+        AddContact.setFont(new Font("",1,35));
+
+        contentPanel.add(AddContact);
+        mainGrid.add(contentPanel);
+        add("North",mainGrid);
+
+        ////////////////////////////////// Cotact label
+
         JPanel contactInfro=new JPanel(new GridLayout(1,2));
 
         JPanel contactInfroLeft=new JPanel(new GridLayout(8,1));
 
         JPanel nemepanel=new JPanel(new FlowLayout(FlowLayout. LEFT));
-        name=new JLabel("Name");
-        name.setHorizontalAlignment(JLabel.LEFT);
-        name.setFont(new Font("",1,20));
+        lbname=new JLabel("Name");
+        lbname.setHorizontalAlignment(JLabel.LEFT);
+        lbname.setFont(new Font("",1,20));
 
         JPanel contactNummberpanel=new JPanel(new FlowLayout(FlowLayout. LEFT));
-        contactNummber=new JLabel("Contact Number");
-        contactNummber.setHorizontalAlignment(JLabel.LEFT);
-        contactNummber.setFont(new Font("",1,20));
+        lbcontactNummber=new JLabel("Contact Number");
+        lbcontactNummber.setHorizontalAlignment(JLabel.LEFT);
+        lbcontactNummber.setFont(new Font("",1,20));
 
         JPanel companypanel=new JPanel(new FlowLayout(FlowLayout. LEFT));
-        company=new JLabel("Company");
-        company.setHorizontalAlignment(JLabel.LEFT);
-        company.setFont(new Font("",1,20));
+        lbcompany=new JLabel("Company");
+        lbcompany.setHorizontalAlignment(JLabel.LEFT);
+        lbcompany.setFont(new Font("",1,20));
 
         JPanel salarypanel=new JPanel(new FlowLayout(FlowLayout. LEFT));
-        salary=new JLabel("Salary");
-        salary.setHorizontalAlignment(JLabel.LEFT);
-        salary.setFont(new Font("",1,20));
+        lbsalary=new JLabel("Salary");
+        lbsalary.setHorizontalAlignment(JLabel.LEFT);
+        lbsalary.setFont(new Font("",1,20));
 
         JPanel Brithdaypanel=new JPanel(new FlowLayout(FlowLayout. LEFT));
-        Brithday=new JLabel("Birthday");
-        Brithday.setHorizontalAlignment(JLabel.LEFT);
-        Brithday.setFont(new Font("",1,20));
+        lbBrithday=new JLabel("Birthday");
+        lbBrithday.setHorizontalAlignment(JLabel.LEFT);
+        lbBrithday.setFont(new Font("",1,20));
 
-        nemepanel.add(name);
-        contactNummberpanel.add(contactNummber);
-        companypanel.add(company);
-        salarypanel.add(salary);
-        Brithdaypanel.add(Brithday);
+        nemepanel.add(lbname);
+        contactNummberpanel.add(lbcontactNummber);
+        companypanel.add(lbcompany);
+        salarypanel.add(lbsalary);
+        Brithdaypanel.add(lbBrithday);
 
         contactInfroLeft.add(nemepanel);
         contactInfroLeft.add(contactNummberpanel);
@@ -77,7 +88,6 @@ class ContactAdd extends JFrame {
 
         contactInfro.add(contactInfroLeft);
         add("West",contactInfro);
-
 
         /////////////////////////////////////contact textfeild
 
@@ -115,6 +125,14 @@ class ContactAdd extends JFrame {
         JPanel buttonPanel2=new JPanel(new FlowLayout(FlowLayout.LEFT));
         JPanel buttonPanel= new JPanel(new GridLayout(1,2,5,5));
         btAddContact =new JButton("ADD Contact");
+        btAddContact.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                boolean status =contact(name,contactNummber,company,salary,Brithday);
+                if(status==true){
+                    JOptionPane.showMessageDialog(null, "This is an alert message!", "Alert", JOptionPane.PLAIN_MESSAGE);
+                }
+
+            }});
         btAddContact.setPreferredSize(new Dimension(110,25));
         btAddContact.setFont(new Font("",1,12));
 
@@ -124,6 +142,16 @@ class ContactAdd extends JFrame {
 
         JPanel btHomePanel=new JPanel(new FlowLayout(FlowLayout.CENTER));
         bthome =new JButton("Back To HomePage");
+        bthome.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                if(HomePage==null){
+                    HomePage=new homePage();
+                    // new homePage().setVisible(false);
+                }
+                HomePage.setVisible(true);
+                dispose();
+
+            }});
         bthome.setPreferredSize(new Dimension(220,25));
         bthome.setFont(new Font("",1,12));
 
@@ -148,8 +176,75 @@ class ContactAdd extends JFrame {
         contactInfro.add(contactInfroRight);
         // add("East",contactInfro);
     }
+    public  boolean contact(String name,String number,String coname,String salary,String date){
+
+       /*
+
+        char s= ' ';
+        do{
+            s= ' ';
+
+            System.out.println("\n\n cid "+ ++count);
+            System.out.println("=======");
+
+            System.out.print("\n Name             :");
+            name=scan.next();
 
 
+            char c=' ';
+            do{
+                c=' ';
+                System.out.print("\n Phone Number     :");
+                number=scan.next();
+
+                if(number.length()!=10 ||number.charAt(0)-48!=0){
+
+                    System.out.println("\n\tInvalid phone number");
+                    System.out.print("\n\nDo you want to add phone number again(Y/N):");
+                    c=scan.next().charAt(0);
+                }
+                else{
+                     boolean Tname=true;
+                }
+            }while(c=='Y');
+
+            System.out.print(" Company Name     :");
+            coname=scan.next();
+
+            do{
+                c=' ';
+                System.out.print(" Salary           :");
+                salary=scan.nextLong();
+                if(salary>0){
+                    boolean Tsalary=true;
+                }
+                else{
+                    System.out.println("\n\tInvalid Salary");
+                    System.out.print("\n\nDo you want to add Salary again(Y/N):");
+                    c=scan.next().charAt(0);
+                }
+            }while(c=='Y');
+
+            System.out.print(" B'Day(YYYY-MM-DD): ");
+            String date=scan.next();
+
+            Contact setContact=new Contact(" "+count,name,number,coname,salary,date);
+            Contact [] tempContact=new Contact[con.length+1];
+            for(int i=0;i<con.length;i++){
+				tempContact[i]=con[i];
+			}
+            con=tempContact;
+            con[con.length-1]=setContact;
+
+            System.out.println("\nContact has been added successfully...");
+
+            System.out.print("\n\nDo you want to add another Contact(Y/N):");
+            s=scan.next().charAt(0);
+        }while(s=='Y');
+
+       Main2();*/
+        return true;
+    }
 
 }
 
