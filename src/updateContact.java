@@ -3,23 +3,23 @@ import java.awt.*;
 import java.awt.event.*;
 
 class ContactUpdate extends JFrame{
-    JTextField tfSearch;
-    JButton btSearch;
-    JLabel name;
-    JLabel contactNummber;
-    JLabel company;
-    JLabel salary;
-    JLabel Brithday;
-    JTextField txtName;
-    JTextField txtcontactNummber;
-    JTextField txtcompany;
-    JTextField txtsalary;
-    JTextField txtBrithday;
-    JButton btAddContact;
-    JButton btCancel;
-    JButton bthome;
+    private JTextField tfSearch;
+    private JButton btSearch;
+    private JLabel name;
+    private JLabel contactNummber;
+    private JLabel company;
+    private JLabel salary;
+    private JLabel Brithday;
+    private JTextField txtName;
+    private JTextField txtcontactNummber;
+    private JTextField txtcompany;
+    private JTextField txtsalary;
+    private JTextField txtBrithday;
+    private JButton btAddContact;
+    private JButton btCancel;
+    private JButton bthome;
     homePage HomePage;
-    ContactAdd  contactAdd = new ContactAdd();
+    static ContactAdd  contactAdd = new ContactAdd();
 
     ContactUpdate(){
         setSize(500, 600);
@@ -58,11 +58,11 @@ class ContactUpdate extends JFrame{
                 String valSearch=tfSearch.getText().trim();
                 int index=findId(valSearch);
                 if(index>=0){
-                    txtName.setText(contactAdd.Contactinfro[index].Cname);
-                    txtcontactNummber.setText(contactAdd.Contactinfro[index].Cphonenumber);
-                    txtcompany.setText(contactAdd.Contactinfro[index].Ccompany);
-                    txtsalary.setText(contactAdd.Contactinfro[index].Csalary);
-                    txtBrithday.setText(contactAdd.Contactinfro[index].Cdate);
+                    txtName.setText(contactAdd.Contactinfro[index].getCname());
+                    txtcontactNummber.setText(contactAdd.Contactinfro[index].getCphonenumber());
+                    txtcompany.setText(contactAdd.Contactinfro[index].getCcompany());
+                    txtsalary.setText(contactAdd.Contactinfro[index].getCsalary());
+                    txtBrithday.setText(contactAdd.Contactinfro[index].getCdate());
                 }else{
                     JOptionPane.showMessageDialog(null, "Incorrect Details", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -158,11 +158,17 @@ class ContactUpdate extends JFrame{
                 String valSearch=tfSearch.getText().trim();
                 int index=findId(valSearch);
                 if(index>=0){
-                    contactAdd.Contactinfro[index].Cname=txtName.getText().trim();
-                    contactAdd.Contactinfro[index].Cphonenumber=txtcontactNummber.getText().trim();
-                    contactAdd.Contactinfro[index].Ccompany=txtcompany.getText().trim();
-                    contactAdd.Contactinfro[index].Csalary=txtsalary.getText().trim();
-                    contactAdd.Contactinfro[index].Cdate=txtBrithday.getText().trim();
+                    contactAdd.Contactinfro[index].setCname(txtName.getText().trim());
+                    contactAdd.Contactinfro[index].setCphonenumber(txtcontactNummber.getText().trim());
+                    contactAdd.Contactinfro[index].setCcompany(txtcompany.getText().trim());
+                    contactAdd.Contactinfro[index].setCsalary(txtsalary.getText().trim());
+                    contactAdd.Contactinfro[index].setCdate(txtBrithday.getText().trim());
+                    txtName.setText("");
+                    txtcontactNummber.setText("");
+                    txtcompany.setText("");
+                    txtsalary.setText("");
+                    txtBrithday.setText("");
+                    tfSearch.setText("");
                 }else{
                     JOptionPane.showMessageDialog(null, "Incorrect Details", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -179,6 +185,7 @@ class ContactUpdate extends JFrame{
                 txtcompany.setText("");
                 txtsalary.setText("");
                 txtBrithday.setText("");
+
 
             }});
         btCancel.setPreferredSize(new Dimension(110,25));
@@ -221,8 +228,9 @@ class ContactUpdate extends JFrame{
 
     public  int findId(String search){
         for(int i=0;i<contactAdd.Contactinfro.length;i++){
-            if((contactAdd.Contactinfro[i].Cname.equalsIgnoreCase(search)| contactAdd.Contactinfro[i].Cphonenumber.equals(search))){
+            if((contactAdd.Contactinfro[i].getCname().equalsIgnoreCase(search)| contactAdd.Contactinfro[i].getCphonenumber().equals(search))){
                 return i;
+
             }
         }
         return -1;

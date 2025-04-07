@@ -54,6 +54,22 @@ class ContactDelete extends JFrame{
         JPanel TextPanelSearch=new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         btSearch =new JButton("Search");
+        btSearch.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                int index=Updatecon.findId(tfSearch.getText().trim());
+                if(index>=0){
+                    lbName.setText(contactAdd.Contactinfro[index].getCname());
+                    lbcontactNummber.setText(contactAdd.Contactinfro[index].getCphonenumber());
+                    lbcompany.setText(contactAdd.Contactinfro[index].getCcompany());
+                    lbsalary.setText(contactAdd.Contactinfro[index].getCsalary());
+                    lbBrithday.setText(contactAdd.Contactinfro[index].getCdate());
+                }else{
+                    JOptionPane.showMessageDialog(null, "Invalid Details", "Alert", JOptionPane.ERROR_MESSAGE);
+                }
+                //JOptionPane.showMessageDialog(null, "This is an alert message!", "Alert", JOptionPane.ERROR_MESSAGE);
+                // contactAdd.UpdateNewContact();
+
+            }});
         btSearch.setPreferredSize(new Dimension(110,25));
         btSearch.setFont(new Font("",1,16));
 
@@ -135,15 +151,60 @@ class ContactDelete extends JFrame{
         JPanel buttonPanel= new JPanel(new GridLayout(1,2,5,5));
 
         btAddContact =new JButton("Delete ");
+        btAddContact.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                if(lbName!=null && lbcontactNummber!=null && lbcompany!=null && lbsalary!= null &&lbBrithday!=null){
+                    int index=Updatecon.findId(tfSearch.getText().trim());
+                    if(index!=-1){
+                        boolean status=deleteCon(index);
+                        if(status){
+                            lbName.setText("");
+                            lbcontactNummber.setText("");
+                            lbcompany.setText("");
+                            lbsalary.setText("");
+                            lbBrithday.setText("");
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Invalid Details", "Alert", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Invalid Details", "Alert", JOptionPane.ERROR_MESSAGE);
+
+                    }
+                }
+
+
+                //JOptionPane.showMessageDialog(null, "This is an alert message!", "Alert", JOptionPane.ERROR_MESSAGE);
+                // contactAdd.UpdateNewContact();
+
+            }});
         btAddContact.setPreferredSize(new Dimension(110,25));
         btAddContact.setFont(new Font("",1,12));
 
         btCancel =new JButton("Cancel");
+        btCancel.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                lbName.setText("");
+                lbcontactNummber.setText("");
+                lbcompany.setText("");
+                lbsalary.setText("");
+                lbBrithday.setText("");
+
+            }});
         btCancel.setPreferredSize(new Dimension(110,25));
         btCancel.setFont(new Font("",1,12));
 
         JPanel btHomePanel=new JPanel(new FlowLayout(FlowLayout.CENTER));
         bthome =new JButton("Back To HomePage");
+        bthome.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                if(HomePage==null){
+                    HomePage=new homePage();
+                    // new homePage().setVisible(false);
+                }
+                HomePage.setVisible(true);
+                dispose();
+
+            }});
         bthome.setPreferredSize(new Dimension(220,25));
         bthome.setFont(new Font("",1,12));
 

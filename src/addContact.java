@@ -3,28 +3,28 @@ import javax.swing.JOptionPane;
 import java.awt.*;
 import java.awt.event.*;
 class ContactAdd extends JFrame {
-    JLabel AddContact;
-    JLabel lbname;
-    JLabel lbcontactNummber;
-    JLabel lbcompany;
-    JLabel lbsalary;
-    JLabel lbBrithday;
-    JTextField txtName;
-    JTextField txtcontactNummber;
-    JTextField txtcompany;
-    JTextField txtsalary;
-    JTextField txtBrithday;
-    JButton btAddContact;
-    JButton btCancel;
-    JButton bthome;
+    private JLabel AddContact;
+    private JLabel lbname;
+    private JLabel lbcontactNummber;
+    private JLabel lbcompany;
+    private JLabel lbsalary;
+    private JLabel lbBrithday;
+    private JTextField txtName;
+    private JTextField txtcontactNummber;
+    private JTextField txtcompany;
+    private JTextField txtsalary;
+    private JTextField txtBrithday;
+    private JButton btAddContact;
+    private JButton btCancel;
+    private JButton bthome;
     homePage HomePage;
 
-    String Cname;
-    String Cphonenumber;
-    String Ccompany;
-    String Csalary;
-    String Cdate;
-    String CId;
+    private String Cname;
+    private String Cphonenumber;
+    private String Ccompany;
+    private String Csalary;
+    private String Cdate;
+    private String CId;
     public static ContactAdd [] Contactinfro=new ContactAdd[0];
     ContactAdd(String CId,String Cname,String Cphonenumber,String Ccompany,String Csalary,String Cdate ){
         this.CId=CId;
@@ -32,6 +32,47 @@ class ContactAdd extends JFrame {
         this.Cphonenumber=Cphonenumber;
         this.Ccompany=Ccompany;
         this.Csalary=Csalary;;
+        this.Cdate=Cdate;
+    }
+    public String getCId(){
+        return CId;
+    }
+    public void setCId(String CId){
+        this.CId=CId;
+    }
+
+    public String getCname(){
+        return Cname;
+    }
+    public void setCname(String Cname){
+        this.Cname=Cname;
+    }
+
+    public String getCphonenumber(){
+        return Cphonenumber;
+    }
+    public void setCphonenumber(String Cphonenumber){
+        this.Cphonenumber=Cphonenumber;
+    }
+
+    public String getCcompany(){
+        return Ccompany;
+    }
+    public void setCcompany(String Ccompany){
+        this.Ccompany=Ccompany;
+    }
+
+    public String getCsalary(){
+        return Csalary;
+    }
+    public void setCsalary(String Csalary){
+        this.Csalary=Csalary;
+    }
+
+    public String getCdate(){
+        return Cdate;
+    }
+    public void setCdate(String Cdate){
         this.Cdate=Cdate;
     }
 
@@ -42,6 +83,14 @@ class ContactAdd extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        /* ContactAdd newContact1 = new ContactAdd(""+1,"Caruka", "0712026512","maga","52000","5225222");
+         ContactAdd newContact2 = new ContactAdd("" +2  ,"Bimhana","0710644491","hama","26223","565682");
+         ContactAdd newContact3 = new ContactAdd("" +3  ,"Aimhana","0710644491","hama","16223","565682");
+
+           Contactinfro[0]=newContact1;
+           Contactinfro[1]=newContact2;
+           Contactinfro[2]=newContact3;
+        */
         JPanel mainGrid=new JPanel(new GridLayout(3,1));
 
         //////////////////////title
@@ -141,20 +190,12 @@ class ContactAdd extends JFrame {
         btAddContact = new JButton("ADD Contact");
         btAddContact.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-
                 String name = txtName.getText().trim();
                 String contactNumber = txtcontactNummber.getText().trim();
                 String company = txtcompany.getText().trim();
                 String salary = txtsalary.getText().trim();                          //Add button to call contact function
                 String birthday = txtBrithday.getText().trim();
-
-                boolean status = contact(name, contactNumber, company, salary, birthday);
-                if (status) {
-                    JOptionPane.showMessageDialog(null, "Correct Details", "Alert", JOptionPane.PLAIN_MESSAGE);
-                    System.out.print("Length is "+Contactinfro.length);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Incorrect Details", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+                UpdateNewContact(name,contactNumber,company,salary,birthday);
             }
         });
 
@@ -169,6 +210,15 @@ class ContactAdd extends JFrame {
                 txtcompany.setText("");
                 txtsalary.setText("");
                 txtBrithday.setText("");
+                int i=1;
+                // for(int i=0;i<Contactinfro.length-1;i++){
+                System.out.println("ID "+Contactinfro[i].getCId());
+                System.out.println("Name "+Contactinfro[i].getCname());
+                System.out.println("Number "+Contactinfro[i].getCphonenumber());
+                System.out.println("Company "+Contactinfro[i].getCcompany());
+                System.out.println("Salary "+Contactinfro[i].getCsalary());
+                System.out.println("////////////////////////////////////////////////////");
+                //}
 
             }
         });
@@ -225,10 +275,29 @@ class ContactAdd extends JFrame {
         }
         ContactAdd newContact = new ContactAdd("" + (Contactinfro.length + 1), name, number, coname, salary, date);
         ContactAdd[] tempContact = new ContactAdd[Contactinfro.length + 1];
+        for(int i=0;i<Contactinfro.length;i++){
+            tempContact[i]=Contactinfro[i];
+        }
         Contactinfro = tempContact;
         Contactinfro[Contactinfro.length - 1] = newContact;
 
         return status ;
+    }
+    public  void UpdateNewContact(String name,String contactNumber,String company,String salary,String birthday){
+
+        boolean status = contact(name, contactNumber, company, salary, birthday);
+        if (status) {
+            JOptionPane.showMessageDialog(null, "Successfully Added", "Alert", JOptionPane.PLAIN_MESSAGE);
+            System.out.print("Length is "+Contactinfro.length);
+            txtName.setText("");
+            txtcontactNummber.setText("");
+            txtcompany.setText("");
+            txtsalary.setText("");
+            txtBrithday.setText("");
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Incorrect Details", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
 public class addContact {

@@ -1,18 +1,24 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 class homePage extends JFrame{
 
-    JButton test2;
-    JLabel  lbiFriend;
-    JLabel lbContact;
-    JLabel lbImage;
-    JButton btAdd;
-    JButton btUpdate;
-    JButton btSearch;
-    JButton btDelete;
-    JButton btView;
-    JLabel lbhome;
+    private JButton test2;
+    private JLabel  lbiFriend;
+    private JLabel lbContact;
+    private JLabel lbImage;
+    private JButton btAdd;
+    private JButton btUpdate;
+    private JButton btSearch;
+    private JButton btDelete;
+    private JButton btView;
+    private JLabel lbhome;
+    ContactAdd contactadd;
+    ContactUpdate Contactupdate;
+    ContactSearch contactSearch;
+    ContactDelete contactDelete;
+    ListContact listContact;
 
     homePage(){
         setSize(750,500);
@@ -69,31 +75,77 @@ class homePage extends JFrame{
 
         JPanel panel1=new JPanel(new FlowLayout(FlowLayout. CENTER));
         btAdd=new JButton("Add New Contact");
+        btAdd.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                if(contactadd==null){
+                    contactadd=new ContactAdd();
+                    new homePage().setVisible(false);
+                }
+                contactadd.setVisible(true);
+                dispose();
+
+            }});
         btAdd.setPreferredSize(new Dimension(270, 25));
         panel1.setBackground(new Color(135, 206, 235));
         btAdd.setHorizontalAlignment(SwingConstants.CENTER);
         btAdd.setFont(new Font("",1,15));
 
+
         JPanel panel2=new JPanel(new FlowLayout(FlowLayout.CENTER));
         btUpdate=new JButton("Update Contact");
+        btUpdate.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                if(Contactupdate==null){
+                    Contactupdate=new ContactUpdate();
+                }
+                Contactupdate.setVisible(true);
+                dispose();
+            }});
         panel2.setBackground(new Color(135, 206, 235));
         btUpdate.setPreferredSize(new Dimension(270, 25));
         btUpdate.setFont(new Font("",1,15));
 
+
         JPanel panel3=new JPanel(new FlowLayout(FlowLayout.CENTER));
         btSearch=new JButton("Search Contact");
+        btSearch.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                if(contactSearch==null){
+                    contactSearch=new ContactSearch();
+                }
+                contactSearch.setVisible(true);
+                dispose();
+            }});
         panel3.setBackground(new Color(135, 206, 235));
         btSearch.setPreferredSize(new Dimension(270, 25));
         btSearch.setFont(new Font("",1,15));
 
+
         JPanel panel4=new JPanel(new FlowLayout(FlowLayout.CENTER));
         btDelete=new JButton("Delete Contact");
+        btDelete.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                if(contactDelete==null){
+                    contactDelete=new ContactDelete();
+                }
+                contactDelete.setVisible(true);
+                dispose();
+            }});
         panel4.setBackground(new Color(135, 206, 235));
         btDelete.setPreferredSize(new Dimension(270, 25));
         btDelete.setFont(new Font("",1,15));
 
+
         JPanel panel5=new JPanel(new FlowLayout(FlowLayout.CENTER));
         btView=new JButton("View Contact");
+        btView.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent evt){
+                if(listContact==null){
+                    listContact=new ListContact();
+                }
+                listContact.setVisible(true);
+                dispose();
+            }});
         panel5.setBackground(new Color(135, 206, 235));
         btView.setPreferredSize(new Dimension(270, 25));
         btView.setFont(new Font("",1,15));
